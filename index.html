@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Traffic Light</title>
+
+  <style>
+    body,
+    html {
+      height: 100%;
+    }
+
+    body { background: linear-gradient(#08f, #fff); }
+
+    #traffic-light,
+    .light {
+      margin: 0 auto;
+    }
+
+    #traffic-light {
+      padding-top: 20px;
+      background: #222;
+      background-image: linear-gradient(transparent 2%, #111 2%, transparent 3%, #111 30%);
+      width: 280px;
+      height: 90%;
+      border-radius: 20px;
+      position: relative;
+      border: solid 5px #333;
+    }
+
+    .light {
+      display: block;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      padding: 5%;
+      margin-top: 10%;
+      margin-bottom: 10%;
+
+      background-size: 5px 5px;
+      background-size: 5px 5px;
+    }
+
+    .red {
+      background-color: red;
+      background-image: radial-gradient(brown, transparent);
+      border: dotted 2px brown;
+      box-shadow:
+        0 0 20px #111 inset,
+        0 0 10px brown;
+    }
+    .yellow {
+      background-color: yellow;
+      background-image: radial-gradient(orange, transparent);
+      border: dotted 2px orange;
+      box-shadow:
+        0 0 20px #111 inset,
+        0 0 10px orange;
+    }
+    .green {
+      background-color: green;
+      background-image: radial-gradient(lime, transparent);
+      border: dotted 2px lime;
+      box-shadow:
+        0 0 20px #111 inset,
+        0 0 10px lime;
+    }
+
+    .off {
+      filter: grayscale(.6);
+      opacity: .7;
+      box-shadow: 0 0 0 2px black inset;
+    }
+  </style>
+
+</head>
+<body>
+  <div id="traffic-light">
+    <div class="light red off"></div>
+    <div class="light yellow off"></div>
+    <div class="light green off"></div>
+  </div>
+
+  <script>
+  (function(d, w) {
+    var time = [3000, 10000, 10000];
+    var current = 2;
+    var lights = Array.from(d.querySelectorAll('.light'));
+
+    function changeLight() {
+      console.log(current);
+      lights.map( l => l.classList.add('off'));
+
+      lights[current].classList.remove('off');
+
+      current = lights[current - 1] ? current - 1 : 2;
+
+      console.log(time[current])
+
+      setTimeout(changeLight, time[current]);
+
+    }
+
+    changeLight();
+
+
+  })(document, window);
+  </script>
+</body>
+</html>
